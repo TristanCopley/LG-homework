@@ -5,17 +5,16 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-
-    console.log('start seeding...');
+	console.log('start seeding...');
 
 	const singleValueArray = await prisma.singleValueArray.create({
 		data: {
 			title: 'Some title',
 			value: 21
 		}
-	})
+	});
 
-    // Seeding settings
+	// Seeding settings
 	for (let i = 0; i < 10; i++) {
 		const setting = await prisma.setting.create({
 			data: {
@@ -26,7 +25,7 @@ async function main() {
 		console.log(`Created setting: ${setting.id}`);
 	}
 
-    console.log('Seeding complete');
+	console.log('Seeding complete');
 }
 
 main()

@@ -9,51 +9,49 @@
 	let singleValueInput = 0.01;
 
 	async function updateSingleValue() {
-
 		let val = singleValue;
 		val.value = singleValueInput;
 
-        const response = await fetch('/api/updateSingleValue', {
-            method: 'POST',
-            body: JSON.stringify(val),
-            headers: {
-                'content-type': 'application/json'
-            }
-        });
+		const response = await fetch('/api/updateSingleValue', {
+			method: 'POST',
+			body: JSON.stringify(val),
+			headers: {
+				'content-type': 'application/json'
+			}
+		});
 
-        singleValue = await response.json();
-    }
+		singleValue = await response.json();
+	}
 
 	async function getSingleValue() {
-
 		const response = await fetch('/api/updateSingleValue', {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json'
-            }
-        });
+			method: 'GET',
+			headers: {
+				'content-type': 'application/json'
+			}
+		});
 
-        singleValue = await response.json();
-
+		singleValue = await response.json();
 	}
 
 	const updateSetting = (id: number, value: string) => async () => {
-        const response = await fetch('/api/updateSetting', {
-            method: 'POST',
-            body: JSON.stringify({id, value}),
-            headers: {
-                'content-type': 'application/json'
-            }
-        });
-        settings[id-1] = await response.json();
-    }
-
+		const response = await fetch('/api/updateSetting', {
+			method: 'POST',
+			body: JSON.stringify({ id, value }),
+			headers: {
+				'content-type': 'application/json'
+			}
+		});
+		settings[id - 1] = await response.json();
+	};
 </script>
 
 <div class="bg-base-300 w-screen min-h-screen p-8 flex flex-col justify-center gap-8">
 	<div class="flex gap-8 justify-center self-center">
 		<div class="bg-base-200 w-96 h-64 self-center justify-center flex">
-			<span class="self-center text-3xl w-fit h-fit text-center px-8 btn btn-neutral">{singleValue.value}</span>
+			<span class="self-center text-3xl w-fit h-fit text-center px-8 btn btn-neutral"
+				>{singleValue.value}</span
+			>
 		</div>
 		<div class="bg-base-200 w-96 h-64 self-center flex flex-col justify-center">
 			<div class="flex flex-col justify-center self-center gap-8">
@@ -62,7 +60,12 @@
 						<span class="label-text">Enter number:</span>
 					</label>
 					<label class="input-group">
-						<input type="text" placeholder="ex: 0.01" class="input input-bordered" bind:value={singleValueInput} />
+						<input
+							type="text"
+							placeholder="ex: 0.01"
+							class="input input-bordered"
+							bind:value={singleValueInput}
+						/>
 						<button class="btn btn-neutral" on:click={updateSingleValue}> Write </button>
 					</label>
 				</div>
@@ -88,10 +91,15 @@
 								<th>{i}</th>
 								<td>{row.title}</td>
 								<td>
-									<input type="text" placeholder="ex: 0.01" class="input input-bordered" bind:value={row.value}/>
+									<input
+										type="text"
+										placeholder="ex: 0.01"
+										class="input input-bordered"
+										bind:value={row.value}
+									/>
 								</td>
 								<td>
-									<button class='btn btn-neutral' on:click={updateSetting(i+1, row.value)}>
+									<button class="btn btn-neutral" on:click={updateSetting(i + 1, row.value)}>
 										Update
 									</button>
 								</td>
