@@ -1,4 +1,5 @@
 import { json } from '@sveltejs/kit';
+import { prisma } from '$lib/server/prisma';
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
